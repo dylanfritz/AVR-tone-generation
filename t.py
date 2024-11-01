@@ -42,5 +42,9 @@ def pick_best_xvalues(h): # will determine the "best" combination of x and y for
             best_y = i
     return (int(math.floor(best_x)), best_y, best_x)
 
-print(pick_best_yvalues(TONE_FREQ))
-print(pick_best_xvalues(TONE_FREQ))
+esty = pick_best_yvalues(TONE_FREQ)
+estx = pick_best_xvalues(TONE_FREQ)
+print(esty)
+print(calc_time(esty[0],esty[1]))
+print(estx)
+print(calc_time(estx[0],estx[1]))
