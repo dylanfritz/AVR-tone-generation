@@ -2,19 +2,27 @@ import math
 
 TONE_FREQ = input("tone frequency?")
 
-def calculate_y(x):
-    return (((((8*math.pow(10,6))/TONE_FREQ)-12)/x)-3)/3
+def calculate_y(x,h):
+    return (((((8*math.pow(10,6))/h)-12)/x)-3)/3
 
-def calculate_x(y):
-    return (((8*math.pow(10,6))/TONE_FREQ)-12)/(3*y+3)
+def calculate_x(y,h):
+    return (((8*math.pow(10,6))/h)-12)/(3*y+3)
+
+def calc_mcs(x, y): #gives number of machine cycles produced by a combo of x and y
+    return (3*y+3)*x+12
+
+def calc_time(x, y): #calculates time delay (in microseconds) of a combo of x and y
+    return calc_mcs(x,y)/8
 
 
 
-def pick_best_yvalues():
+
+
+def pick_best_yvalues(h): # will determine the "best" combination of x and y for a given hertz where both are in the range 0-255 and best is determined by smallest decimal part where y is the approximated value
     best_y = 0.9999999999
     best_x = 255
     for i in reversed(range(1,256)):
-        this_y = calculate_y(i)
+        this_y = calculate_y(i,h)
         if(this_y > 255):
             continue
         if(this_y % 1 < best_y % 1):
@@ -22,11 +30,11 @@ def pick_best_yvalues():
             best_x = i
     return (best_x,int(math.floor(best_y)), best_y)
 
-def pick_best_xvalues():
+def pick_best_xvalues(h): # will determine the "best" combination of x and y for a given hertz where both are in the range 0-255 and best is determined by smallest decimal part where x is the approximated value
     best_x = 0.9999999999
     best_y = 255
-    for i in reversed(range(1,256)):
-        this_x = calculate_x(i)
+    for i in reversed(range(1,256)): 
+        this_x = calculate_x(i,h)
         if(this_x > 255):
             continue
         if(this_x % 1 < best_x % 1):
@@ -34,5 +42,5 @@ def pick_best_xvalues():
             best_y = i
     return (int(math.floor(best_x)), best_y, best_x)
 
-print(pick_best_yvalues())
-print(pick_best_xvalues())
+print(pick_best_yvalues(TONE_FREQ))
+print(pick_best_xvalues(TONE_FREQ))
