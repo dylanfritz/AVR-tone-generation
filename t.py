@@ -20,6 +20,6 @@ def pick_best_values():
         if(this_y % 1 < best_y % 1):
             best_y = this_y
             best_x = i
-    return (best_x,best_y)
+    return (best_x,math.floor(best_y))
 
 print(pick_best_values())
