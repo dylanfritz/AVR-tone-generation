@@ -14,6 +14,9 @@ def calc_mcs(x, y): #gives number of machine cycles produced by a combo of x and
 def calc_time(x, y): #calculates time delay (in microseconds) of a combo of x and y
     return calc_mcs(x,y)/8
 
+def calc_periods(x, y, s): # calculates the number of periods of an x and y combo to play a tone for s seconds
+    ms_desired = s*math.pow(10, 6)
+    return ms_desired/calc_time(x,y)
 
 
 
@@ -46,5 +49,6 @@ esty = pick_best_yvalues(TONE_FREQ)
 estx = pick_best_xvalues(TONE_FREQ)
 print(esty)
 print(calc_time(esty[0],esty[1]))
+print(calc_periods(esty[0], esty[1], 1))
 print(estx)
 print(calc_time(estx[0],estx[1]))
