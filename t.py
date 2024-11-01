@@ -16,7 +16,7 @@ def pick_best_values():
     for i in reversed(range(1,256)):
         this_y = calculate_y(i)
         if(this_y > 255):
-            pass
+            continue
         if(this_y % 1 < best_y % 1):
             best_y = this_y
             best_x = i
