@@ -13,7 +13,7 @@ def calculate_x(y):
 def pick_best_values():
     best_y = 0.9999999999
     for i in reversed(range(1,256)):
-        this_y = calculate_y(i):
+        this_y = calculate_y(i)
         if(this_y > 255):
             pass
         if(this_y % 1 < best_y % 1):
