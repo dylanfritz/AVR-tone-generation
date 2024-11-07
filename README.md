@@ -2,7 +2,7 @@
 This is a project I am developing to be able to play any song on a buzzer using the Atmega324PB AVR microcontroller.
 
 # How does it work?
-The scripts in this repository will eventually be able to generate a complete lookup table, ready to be loaded to the microcontrollers code memory. This program has runtime equations that correspond to the actual number of machine cycles that the delay function will use, given two values: X and Y. X is the number of times the inner loop will execute. Y is the number of times the outer loop will execute. Both are bounded by 1-255 as these will be input into an actual 8 bit register.
+The scripts in this repository will eventually be able to generate a complete lookup table, ready to be loaded to the microcontrollers code memory. This program has runtime equations that correspond to the actual number of machine cycles that the delay function will use, given two values: X and Y. X is the number of times the outer loop will execute. Y is the number of times the inner loop will execute. Both are bounded by 1-255 as these will be input into an actual 8 bit register.
 
 # What is the equation used?
 To calculate the delay needed I used the equation (3Y+3)X+12 = (8,000,000/H). The left hand side is the runtime equation for the function with the loop variables as mentioned previously. The right hand side is 8*10^6 clock cycles per second divided by H (the frequency of the tone in Hz). Rearranging this equation to solve for X or Y respectively will give the value that one must be, given the desired value of the other and H. These are the equations used in the functions in the python script.
